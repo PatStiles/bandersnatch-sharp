@@ -58,6 +58,28 @@ public class FrETests
         }
     }
 
+
+    [Test]
+    public void TestcInverse()
+    {
+        using IEnumerator<FrE> set = FrE.GetRandom().GetEnumerator();
+        for (int i = 0; i < 1000; i++)
+        {
+            FrE x = set.Current;
+            FrE y = new FrE();
+            FrE z = new FrE();
+            if (x.IsZero)
+            {
+                set.MoveNext();
+                continue;
+            }
+            FrE.cInverse(x, y);
+            FrE.cInverse(y, z);
+            Assert.IsTrue(z.Equals(x));
+            set.MoveNext();
+        }
+    }
+
     [Test]
     public void TestInverseMultiplication()
     {
